@@ -3,8 +3,8 @@
 ## Introduction:
 The provided codes implement NLSDeconv, an efficient cell-type deconvolution method for spatial transcriptomics (ST) data. NLSDeconv outputs an estimate for the proportion of each cell type within each spatial location in the tissue.
 
-We have two algorithm options: soft-thresholding least squares (SLS) and non-negative least squares (NLS). SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
-To implement the algorithm, user needs to provide an ST dataset and a reference scRNA-seq dataset (with cell type information).
+We have two algorithm options: **soft-thresholding least squares (SLS)** and **non-negative least squares (NLS)**. SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
+To implement the algorithm, user needs to provide **an ST dataset** and **an scRNA-seq dataset** (with cell type information).
 
 We provide example codes for running SLS on a seqFISH+ dataset in `main_example.py`.
 
