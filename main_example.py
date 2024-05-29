@@ -18,10 +18,6 @@ if __name__ == '__main__':
     # preprocess
     ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key=celltype_key).preprocess()
 
-    celltype_mapping = ad_sc.obs[celltype_key]
-    num_celltypes = len(celltype_mapping.unique())
-    print(f'Number of cell types: {num_celltypes}')
-
     # deconvolution
     flist = ['astrocytes', 'Olig', 'endo_mural', 'iNeuron', 'eNeuron', 'microglia']
     # method of Softthreshold Least Square

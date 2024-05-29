@@ -34,6 +34,9 @@ class Preprocess:
         genes_sc = np.unique(markers_df.melt().value.values)
         #self.obj = self.obj[:,genes_sc].copy()
         genes = list(set(genes_sc).intersection(set(self.stobj.var_names.values)))
+
+        cells = celltype_counts.index.difference(celltype_drop)
+        print(f'Number of cells: {len(cells)}')
         print(f'Number of genes: {len(genes)}')
 
         # select common genes
