@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os
 
-def separate_plt(res, head_res, ad_st, spot_size, ncols=3, show_head_res=None, file_name=None):
+def separate_plt(res, head_res, ad_st, spot_size=400, ncols=3, show_head_res=None, file_name=None):
     # construct plot data
     coords = [[x, y] for x, y in zip(ad_st.obs["x"].values, ad_st.obs["y"].values)]
     adata = sc.AnnData(X=res, obs=coords)
@@ -15,7 +15,7 @@ def separate_plt(res, head_res, ad_st, spot_size, ncols=3, show_head_res=None, f
         show_head_res = head_res
     sc.pl.spatial(adata, color=show_head_res, cmap="inferno", spot_size=spot_size, vmax=1, vmin=0, ncols=ncols, save=file_name, return_fig=True)
 
-def overall_plt(res, head_res, ad_st, spot_size, margin_size=400, file_name=None):
+def overall_plt(res, head_res, ad_st, spot_size=250, margin_size=400, file_name=None):
     # construct plot data
     coords = [[x, y] for x, y in zip(ad_st.obs["x"].values, ad_st.obs["y"].values)]
     adata = sc.AnnData(X=res, obs=coords)
