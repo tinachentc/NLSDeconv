@@ -12,9 +12,7 @@ We provide example codes for running SLS on a seqFISH+ dataset in `main_example.
 Developed on `python = 3.11` `PyTorch = 2.0.1`
 
 You can install the rest of the requirements via
-```bash
-pip install -r requirements.txt
-```
+`pip install -r requirements.txt`
 
 ## Pipeline:
 1. Load ST and scRNA-seq datasets separately.
