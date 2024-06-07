@@ -23,7 +23,10 @@ if __name__ == '__main__':
     # method of Softthreshold Least Square
     res, time_res, head_res = Deconv(ad_sc, ad_st, flist=flist).SLS()
     # method of Nonnegative Least Square (estimate lr when lr=None)
-    #res, time_res, head_res = Deconv(ad_sc, ad_st, flist=flist, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cpu")
+    # for CPU
+    # res, time_res, head_res = Deconv(ad_sc, ad_st, flist=flist, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cpu")
+    # for GPU (e.g. cuda:0)
+    # res, time_res, head_res = Deconv(ad_sc, ad_st, flist=flist, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cuda:0")
 
     # plot
     res = res.cpu().numpy()

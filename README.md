@@ -6,7 +6,7 @@ The provided codes implement NLSDeconv, an efficient cell-type deconvolution met
 We have two algorithm options: **soft-thresholding least squares (SLS)** and **non-negative least squares (NLS)**. SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
 To implement the algorithm, user needs to provide **an ST dataset** and **an scRNA-seq dataset** (with cell type information).
 
-We provide example codes for running SLS on a seqFISH+ dataset in `main_example.py`.
+We provide example codes for running algorithm on a seqFISH+ dataset in `main_example.py`. It can be directly run through after `example_data.zip` is unzipped to the current directory. 
 
 ## Requirements:
 Developed on `python = 3.11` `PyTorch = 2.0.1`
@@ -35,7 +35,10 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
  ```
  - NLS
  ```bash
- res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000)
+# CPU usage
+ res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cpu")
+# GPU usage (e.g. device name cuda:0)
+ res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cuda:0")
  ```
 4. Visulize the deconvolution result.
  - An overall pie plot
