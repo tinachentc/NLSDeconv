@@ -11,7 +11,9 @@ We provide example codes for running algorithm on a seqFISH+ dataset in `main_ex
 <div style="text-align: center;">
   <img src="./figures/overall_plt.png" alt="Example of Our Cell-type Deconvolution Result on seqFISH+ dataset">
 </div>
-
+<div style="text-align: center;">
+  <img src="./figures/showseparate_plt.png" alt="Example2 of Our Cell-type Deconvolution Result on seqFISH+ dataset">
+</div>
 ## Requirements:
 Developed on `python = 3.11` `PyTorch = 2.0.1`
 
