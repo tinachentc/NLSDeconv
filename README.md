@@ -6,13 +6,10 @@ The provided codes implement NLSDeconv, an efficient cell-type deconvolution met
 We have two algorithm options: **soft-thresholding least squares (SLS)** and **non-negative least squares (NLS)**. SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
 To implement the algorithm, user needs to provide **an ST dataset** and **an scRNA-seq dataset** (with cell type information).
 
-We provide example codes for running algorithm on a seqFISH+ dataset in `main_example.py`. It can be directly run through after `example_data.zip` is unzipped to the current directory. 
+We provide example codes for running algorithm on a seqFISH+ dataset in `main_example.py`. It can be directly run through after `example_data.zip` is unzipped to the current directory. We also provide the result plot in the below figure as a visualization example.
 
 <div style="text-align: center;">
-  <figure style="margin: 0 auto;">
-    <img src="./figures/overall_plt.png" alt="Example of Our Cell-type Deconvolution Result on seqFISH+ dataset" style="display: block; margin: 0 auto;">
-    <figcaption style="text-align: center;">Example of Our Cell-type Deconvolution Result on seqFISH+ dataset</figcaption>
-  </figure>
+  <img src="./figures/overall_plt.png" alt="Example of Our Cell-type Deconvolution Result on seqFISH+ dataset">
 </div>
 
 ## Requirements:
