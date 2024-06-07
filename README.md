@@ -8,7 +8,7 @@ To implement the algorithm, user needs to provide **an ST dataset** and **an scR
 
 We provide example codes for running algorithm on a seqFISH+ dataset in `main_example.py`. It can be directly run through after `example_data.zip` is unzipped to the current directory. 
 
-![](./figures/overall_plt.eps)
+![](./figures/overall_plt.png)
 
 ## Requirements:
 Developed on `python = 3.11` `PyTorch = 2.0.1`
