@@ -77,12 +77,12 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
  - for `overall_plt`, arguments for flexibly adjusting figures:
    - `spot_size` (radius of scatters): Suggest to use minimum difference of x/y coordinates as the starting tuning value.
    - `margin_size` (leave extra space for legend): Suggest to use minimum difference of x/y coordinates as the starting tuning value.
-   - `file_name` (save the figure to `file_name` under the current directory, e.g. *overall_plt.pdf*): Default is *None*.
+   - `file_name` (save the figure to `file_name` under the current directory, e.g. *overall_plt.png*): Default is *None*.
  - for `separate_plt`, arguments for flexibly adjusting figures:
    - `show_head_res` (list of cell types to plot): Default is *None* (plot all cell types).
    - `ncols` (number of plots to show in each row): Default is *3*.
    - `spot_size` (radius of scatters):  Suggest to use minimum difference of x/y coordinates as the starting tuning value.
-   - `file_name` (save the figure to `file_name` under the current directory, e.g. *separate_plt.jpg*): Default is *None*.
+   - `file_name` (save the figure to `file_name` under the current directory, e.g. *separate_plt.pdf*): Default is *None*.
 
 ## Attribution:
 Datasets are referred from the study: [a comprehensive benchmarking with practical guidelines for cellular deconvolution of spatial transcriptomics](https://zenodo.org/records/10184476).
