@@ -1,4 +1,4 @@
-# NLSDeconv: Cell-type Deconvolution
+# NLSDeconv: A Cell-type Deconvolution Method
 
 ## Introduction:
 The provided codes implement NLSDeconv, an efficient cell-type deconvolution method for spatial transcriptomics (ST) data. NLSDeconv outputs an estimate for the proportion of each cell type within each spatial location in the tissue.
