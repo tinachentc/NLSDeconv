@@ -9,7 +9,7 @@ To implement the algorithm, user needs to provide **an ST dataset** and **an scR
 We provide example codes for running algorithm on a seqFISH+ dataset in `main_example.py`. It can be directly run through after `example_data.zip` is unzipped to the current directory. 
 
 <div style="text-align: center;">
-  <img src="./figures/overall_plt.png">
+  <img src="./figures/overall_plt.png" alt="Example of Our Cell-type Deconvolution Result on seqFISH+ dataset">
 </div>
 
 ## Requirements:
