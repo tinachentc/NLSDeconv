@@ -3,10 +3,10 @@
 ## Introduction:
 The provided codes implement NLSDeconv, an efficient cell-type deconvolution method for spatial transcriptomics (ST) data. NLSDeconv outputs an estimate for the proportion of each cell type within each spatial location in the tissue.
 
-We have two algorithm options: **soft-thresholding least squares (SLS)** and **non-negative least squares (NLS)**. SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
-To implement the algorithm, user needs to provide **an ST dataset** and **an scRNA-seq dataset** (with cell type information).
+NLSDeconv have two implemented algorithm options: **soft-thresholding least squares (SLS)** and **non-negative least squares (NLS)**. SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
+To run the algorithms, user needs to provide **an ST dataset** and **an scRNA-seq dataset** (with cell type information).
 
-We provide example codes for running algorithm on a seqFISH+ dataset in `main_example.py`. It can be directly run through after `example_data.zip` is unzipped to the current directory. We also provide the result plot in the below figure as a visualization example.
+We provide example codes for running these algorithms on a seqFISH+ dataset in `main_example.py`. To run this, users will need to first unzip `example_data.zip` to the working directory. Results can be visualized as follows.
 
 <div style="text-align: center;">
   <img src="./figures/overall_plt.png" alt="Example of Our Cell-type Deconvolution Result on seqFISH+ dataset" style="width: 39%; height: auto;">
@@ -14,7 +14,7 @@ We provide example codes for running algorithm on a seqFISH+ dataset in `main_ex
 </div>
 
 ## Requirements:
-Developed on `python = 3.11` `PyTorch = 2.0.1`
+Developed based on `python = 3.11` , `PyTorch = 2.0.1`
 
 You can install the rest of the requirements via
 `pip install -r requirements.txt`
@@ -25,7 +25,7 @@ You can install the rest of the requirements via
 ad_st = sc.read_h5ad(st_dir)
 ad_sc = sc.read_h5ad(sc_dir)
 ```
-2. Preprocess both datasets with one line code, which includes:
+2. Preprocess both datasets in sequencing steps including:
  - total count normalization for scRNA-seq dataset
  - removal of cell types with small number of observations for scRNA-seq dataset
  - selection of top genes characterizing each cell type for scRNA-seq dataset
@@ -33,7 +33,7 @@ ad_sc = sc.read_h5ad(sc_dir)
 ```bash
 ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
 ```
-3. Apply a deconvolution algorithm, SLS or NLS.
+3. Run deconvolution algorithm, SLS or NLS.
  - SLS
  ```bash
  res, time_res, head_res = Deconv(ad_sc, ad_st).SLS()
@@ -45,7 +45,7 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
 # GPU usage (e.g. device name cuda:0)
  res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cuda:0")
  ```
-4. Visulize the deconvolution result.
+4. Visulize the deconvolution results.
  - An overall pie plot
  ```bash
  overall_plt(res, head_res, ad_st, spot_size=250, margin_size=400)
@@ -55,7 +55,7 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
  separate_plt(res, head_res, ad_st, show_head_res=head_res, spot_size=400)
  ```
 
-## Arguments:
+## Function arguments:
 1. Preprocessing
  - required arguments: `ad_st` (ST dataset read through *scanpy*), `ad_sc` (scRNA-seq dataset read through *scanpy*), `celltype_key` (the column name in `ad_sc.obs` which contains the cell type information).
  - optional arguments:
