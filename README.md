@@ -1,20 +1,20 @@
 # NLSDeconv: A Cell-type Deconvolution Method for Spatial Transcriptomics Data
 
-## Introduction:
-The provided codes implement NLSDeconv, an efficient cell-type deconvolution method for spatial transcriptomics (ST) data. NLSDeconv outputs an estimate for the proportion of each cell type within each spatial location in the tissue.
+## Introduction
+NLSDeconv is an efficient cell-type deconvolution method for spatial transcriptomics (ST) data. NLSDeconv outputs an estimate for the proportion of each cell type within each spatial location in the tissue.
 
-NLSDeconv have two implemented algorithm options: **soft-thresholding least squares (SLS)** and **non-negative least squares (NLS)**. SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
+NLSDeconv has two implemented algorithm options: **soft-thresholding least squares (SLS)** and **non-negative least squares (NLS)**. SLS is developed as a fast approximation version of NLS, and is recommended for users without GPU access.
 To run the algorithms, user needs to provide **an ST dataset** and **an scRNA-seq dataset** (with cell type information).
 
-We provide example codes for running these algorithms on a seqFISH+ dataset in `main_example.py`. To run this, users will need to first unzip `example_data.zip` to the working directory. Results can be visualized as follows.
+We provide some example codes for running these algorithms on a seqFISH+ dataset in `main_example.py`. To run this, users will need to first unzip `example_data.zip` to the working directory. Results can be visualized as follows.
 
 <div style="text-align: center;">
   <img src="./figures/overall_plt.png" alt="Example of Our Cell-type Deconvolution Result on seqFISH+ dataset" style="width: 39%; height: auto;">
   <img src="./figures/showseparate_plt.png" alt="Example2 of Our Cell-type Deconvolution Result on seqFISH+ dataset" style="width: 59%; height: auto;">
 </div>
 
-## Requirements:
-Developed based on `python = 3.11` , `PyTorch = 2.0.1`
+## Requirements
+NLSDeconv was developed under `python = 3.11` , `PyTorch = 2.0.1`
 
 You can install the rest of the requirements via
 `pip install -r requirements.txt`
@@ -55,7 +55,7 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
  separate_plt(res, head_res, ad_st, show_head_res=head_res, spot_size=400)
  ```
 
-## Function arguments:
+## Function arguments
 1. Preprocessing
  - required arguments: `ad_st` (ST dataset read through *scanpy*), `ad_sc` (scRNA-seq dataset read through *scanpy*), `celltype_key` (the column name in `ad_sc.obs` which contains the cell type information).
  - optional arguments:
@@ -87,5 +87,5 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
    - `spot_size` (radius of scatters):  Suggest to use minimum difference of x/y coordinates as the starting tuning value.
    - `file_name` (save the figure to `file_name` under the current directory, e.g. *separate_plt.pdf*): Default is *None*.
 
-## Attribution:
-Datasets are referred from the study: [a comprehensive benchmarking with practical guidelines for cellular deconvolution of spatial transcriptomics](https://zenodo.org/records/10184476).
+## References
+Datasets were ported from the study: [a comprehensive benchmarking with practical guidelines for cellular deconvolution of spatial transcriptomics](https://zenodo.org/records/10184476).
