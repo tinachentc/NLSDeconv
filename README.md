@@ -27,7 +27,7 @@ ad_sc = sc.read_h5ad(sc_dir)
 ```
 2. Preprocess both datasets in sequencing steps including:
  - total count normalization for scRNA-seq dataset
- - removal of cell types with small number of observations for scRNA-seq dataset
+ - removal of cell types with too few cells in that cell type for scRNA-seq dataset
  - selection of top genes characterizing each cell type for scRNA-seq dataset
  - matching genes for ST and scRNA-seq datasets
 ```bash
