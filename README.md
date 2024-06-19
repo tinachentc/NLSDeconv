@@ -13,6 +13,8 @@ We provide some example codes for running these algorithms on a seqFISH+ dataset
   <img src="./figures/showseparate_plt.png" alt="Example2 of Our Cell-type Deconvolution Result on seqFISH+ dataset" style="width: 59%; height: auto;">
 </div>
 
+For more details, please refer to our paper: [NLSDeconv: an efficient cell-type deconvolution method for spatial transcriptomics data](https://www.biorxiv.org/content/10.1101/2024.06.13.598922v1).
+
 ## Requirements
 NLSDeconv was developed under `python = 3.11` , `PyTorch = 2.0.1`
 
