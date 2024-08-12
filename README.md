@@ -43,9 +43,9 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
  - NLS
  ```bash
 # CPU usage
- res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cpu")
+ res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(lr=1e-2, warm_start=True, num_epochs=1000, device="cpu")
 # GPU usage (e.g. device name cuda:0)
- res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(reg=1e-1, lr=1e-2, warm_start=True, num_epochs=1000, device="cuda:0")
+ res, time_res, head_res = Deconv(ad_sc, ad_st, normalization=True).NLS(lr=1e-2, warm_start=True, num_epochs=1000, device="cuda:0")
  ```
 4. Visulize the deconvolution results.
  - An overall pie plot
@@ -72,7 +72,7 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
    - `normalization` (whether divide ST and scRNA-seq count matrices by the overall maximum count): Default is *False*. We recommend *False* for SLS and *True* for NLS.
  - for `.SLS()`: no argument
  - for `.NLS()`, required argument is `lr` (learning rate), optional arguments:
-   - `reg` (ridge regularization parameter): Default is *0.*.
+   - `reg` (ridge regularization parameter): Default is *0.1*.
    - `warm_start` (whether to use least square estimator as a warm start): Default is *True*.
    - `num_epochs` (number of epochs): Default is *1000*.
    - `device` (device for running the algorithm): Default is *"cpu"*.

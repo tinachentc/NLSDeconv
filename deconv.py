@@ -77,7 +77,7 @@ class Deconv:
 
         return res_LS, time_LS, self.flist
 
-    def NLS(self, lr, reg=0., warm_start=True, num_epochs=1000, device="cpu"):
+    def NLS(self, lr, reg=1e-1, warm_start=True, num_epochs=1000, device="cpu"):
         if device != "cpu" and torch.cuda.is_available():
             print(f'Using device: {device}')
             device = torch.device(device)
