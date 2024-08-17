@@ -4,3 +4,4 @@ numpy
 matplotlib
 anndata
 scipy
+scikit-learn

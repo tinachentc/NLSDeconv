@@ -72,7 +72,8 @@ ad_st, ad_sc = Preprocess(ad_st, ad_sc, celltype_key='celltype').preprocess()
    - `normalization` (whether divide ST and scRNA-seq count matrices by the overall maximum count): Default is *False*. We recommend *False* for SLS and *True* for NLS.
  - for `.SLS()`: no argument
  - for `.NLS()`, required argument is `lr` (learning rate), optional arguments:
-   - `reg` (ridge regularization parameter): Default is *0.1*.
+   - `reg` (ridge regularization parameter): Default is *0.1*. Accept number and list of number. When setting list of number, cross-validation will help select the best one. 
+   - `n_fold` (cross-validation fold number): Default is *5*. Notice that this parameter is only in use when `reg` is a list.
    - `warm_start` (whether to use least square estimator as a warm start): Default is *True*.
    - `num_epochs` (number of epochs): Default is *1000*.
    - `device` (device for running the algorithm): Default is *"cpu"*.

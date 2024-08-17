@@ -4,6 +4,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
+from sklearn.model_selection import KFold
 
 from anndata import AnnData
 from scipy import sparse
@@ -77,7 +78,7 @@ class Deconv:
 
         return res_LS, time_LS, self.flist
 
-    def NLS(self, lr, reg=1e-1, warm_start=True, num_epochs=1000, device="cpu"):
+    def NLS(self, lr, reg=1e-1, n_fold=5, warm_start=True, num_epochs=1000, device="cpu"):
         if device != "cpu" and torch.cuda.is_available():
             print(f'Using device: {device}')
             device = torch.device(device)
@@ -110,15 +111,46 @@ class Deconv:
         output_dat = output_dat.to(device).float()
 
         # model setting
-        model0 = baseline(init_mat=init_mat, input_dim=self.input_dim, output_dim=self.output_dim)
-        model0.to(device)
-        optimizer = optim.Adam(model0.parameters(), lr=lr)#optim.SGD(model0.parameters(), lr=lr)
+        if not isinstance(reg, list):
+            model0 = baseline(init_mat=init_mat, input_dim=self.input_dim, output_dim=self.output_dim)
+            model0.to(device)
+            optimizer = optim.Adam(model0.parameters(), lr=lr)
+            rs = reg
+        else:
+            train_mse_seq = torch.zeros(len(reg))
+            kf = KFold(n_splits=n_fold, shuffle=True)
+            q = output_dat.shape[1]
+            for r in reg:
+                mse_temp = torch.zeros(n_fold)
+                for fold, (train_idx, val_idx) in enumerate(kf.split(range(q))):
+                    # print(f"FOLD {fold+1}/{n_fold}, REG {reg}")
+                    input_dat_train = input_dat[:, train_idx]
+                    output_dat_train = output_dat[:, train_idx]
+                    model0 = baseline(init_mat=init_mat, input_dim=self.input_dim, output_dim=self.output_dim)
+                    model0.to(device)
+                    optimizer = optim.Adam(model0.parameters(), lr=lr)
+                    for epoch in range(num_epochs):
+                        optimizer.zero_grad()
+                        output = model0(input_dat_train)
+                        loss = loss_function(output, output_dat_train) + r * torch.norm(model0.weight, p='fro') / 2
+                        loss.backward()
+                        optimizer.step()
+
+                        with torch.no_grad():
+                            model0.weight.data.clamp_(min=0)
+
+                    mse_temp[fold] = loss_function(model0(input_dat[:, val_idx]), output_dat[:, val_idx]).item()
+                train_mse_seq[reg.index(r)] = mse_temp.mean()
+                print(f'reg: {r}, mse: {mse_temp.mean()}')
+
+            rs = reg[torch.argmin(train_mse_seq)]
+        print(f'selected reg: {rs}')
 
         # training
         for epoch in range(num_epochs):
             optimizer.zero_grad()
             output = model0(input_dat)
-            loss = loss_function(output, output_dat)+reg*torch.norm(model0.weight, p='fro')/2
+            loss = loss_function(output, output_dat)+rs*torch.norm(model0.weight, p='fro')/2
             loss.backward()
             optimizer.step()
             print(f'Epoch {epoch + 1}, Loss: {loss.item():.4f}')
